@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured">
+    <list jcr:primaryType="nt:unstructured">
+        <columns jcr:primaryType="nt:unstructured">
+            <select
+                jcr:primaryType="nt:unstructured"
+                configurable="{Boolean}false"
+                default="{Boolean}true"
+                select="{Boolean}true"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Title"
+                configurable="{Boolean}false"
+                default="{Boolean}true"
+                sortable="{Boolean}true"/>
+            <description
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Description"
+                columnGroup="metadata"
+                default="{Boolean}true"
+                sortable="{Boolean}true"/>
+        </columns>
+    </list>
+</jcr:root>
