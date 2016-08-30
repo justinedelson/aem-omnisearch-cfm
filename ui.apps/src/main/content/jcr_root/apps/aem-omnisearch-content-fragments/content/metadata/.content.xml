@@ -3,7 +3,7 @@
     jcr:primaryType="sling:Folder"
     jcr:title="Content Fragments"
     cardPath="aem-omnisearch-content-fragments/components/card"
-    includeInSuggestions="{Boolean}true"
-    listItemPath="aem-omnisearch-content-fragments/components/listview"
-    listOrder="{Long}1"
+    includeInSuggestions="{Boolean}true"    
+    listItemPath="aem-omnisearch-content-fragments/components/row"
+    listOrder="{Long}10"
     simpleCardPath=""/>
