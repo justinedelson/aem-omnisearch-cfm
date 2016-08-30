@@ -1,4 +1,7 @@
-<%@include file="/libs/granite/ui/global.jsp"%><%
+<%---
+This is necessary to workaround a bug in AEM 6.2 where column configurations can only be stored under /libs.
+--%><%
+%><%@include file="/libs/granite/ui/global.jsp"%><%
 %><%@page session="false"
           import="org.apache.commons.lang.StringUtils,
                   com.adobe.granite.ui.components.ds.DataSource,

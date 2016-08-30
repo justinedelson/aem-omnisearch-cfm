@@ -24,6 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This is a sample implementation of OmniSearchHandler that searches for Content Fragments.
+ * In most real-world cases, this class would actually extend AbstractOmniSearchHandler, but
+ * in this case, we are fully implementing the interface to be as explicit as possible.
+ */
 @Component
 @Service
 public final class ContentFragmentOmniSearchHandler implements OmniSearchHandler {
