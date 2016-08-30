@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
     <filter root="/apps/aem-omnisearch-content-fragments"/>
-
-
-
+    <filter root="/apps/granite/ui/components/shell/omnisearch/datasource/columnsdatasource/columnsdatasource.jsp"/>
 </workspaceFilter>
