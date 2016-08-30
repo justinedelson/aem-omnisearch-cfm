@@ -3,7 +3,7 @@ var CONTENT_FRAGMENT_EDITOR_VANITY = "/editor.html";
 
 use(function() {
     var resourceResolver, asset, lastModified, rtf, date, formattedRelativeTime;
-    
+
     resourceResolver = resource.resourceResolver;
     asset = resource.adaptTo(com.day.cq.dam.api.Asset);
     if (asset) {
