@@ -20,7 +20,6 @@ import javax.jcr.Session;
 import javax.jcr.ValueFactory;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +40,14 @@ public final class ContentFragmentOmniSearchHandler implements OmniSearchHandler
 
     @Override
     public Query getSpellCheckQuery(ResourceResolver resourceResolver, String term) {
+        try {
+            final String queryStr = "SELECT [rep:spellcheck()] FROM [dam:Asset] as s WHERE [jcr:path] = '/' AND SPELLCHECK($term)";
+            final Query query = createQuery(resourceResolver, term, queryStr);
+            return query;
+        } catch (RepositoryException e) {
+            log.error("Error while creating spell query", e);
+
+        }
         return null;
     }
 
