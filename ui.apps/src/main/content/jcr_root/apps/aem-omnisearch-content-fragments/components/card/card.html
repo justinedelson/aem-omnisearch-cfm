@@ -1,10 +1,10 @@
-<coral-card data-sly-use.data="data.js"
+<coral-card
+	data-sly-use.data="data.js"
 	class="foundation-collection-navigator"
 	data-foundation-collection-navigator-href="${data.navigationHref}"
 	itemscope="itemscope"
 	itemtype="http://schema.org/WebPage"
 	colorhint="#ffffff">
-
 	<coral-card-asset>
 		<img src="${data.thumbnailUrl}">
 	</coral-card-asset>
@@ -12,4 +12,10 @@
 		<coral-card-context>${'FRAGMENT' @ i18n, locale=request.locale}</coral-card-context>
 		<coral-card-title class="foundation-collection-item-title" value="${data.title}">${data.title}</coral-card-title>
 	</coral-card-content>
+    <coral-card-propertylist data-sly-test=${data.lastModified}>
+        <coral-card-property icon="edit">
+        	<time datetime="${data.lastModified}">${data.formattedRelativeTime}</time>
+        </coral-card-property>
+    </coral-card-propertylist>
+	<link rel="properties" href="${data.navigationHref}">
 </coral-card>
