@@ -1,9 +1,15 @@
-<coral-card data-sly-use.data="data.js">
-    <coral-card-asset>
-      	<img src="${data.thumbnailUrl}">
-    </coral-card-asset>
+<coral-card data-sly-use.data="data.js"
+	class="foundation-collection-navigator"
+	data-foundation-collection-navigator-href="${data.navigationHref}"
+	itemscope="itemscope"
+	itemtype="http://schema.org/WebPage"
+	colorhint="#ffffff">
+
+	<coral-card-asset>
+		<img src="${data.thumbnailUrl}">
+	</coral-card-asset>
 	<coral-card-content>
-		<coral-card-context>${'DOCUMENT' @ i18n, locale=request.locale}</coral-card-context>
-		<coral-card-title class="foundation-collection-item-title">${data.title}</coral-card-title>
+		<coral-card-context>${'FRAGMENT' @ i18n, locale=request.locale}</coral-card-context>
+		<coral-card-title class="foundation-collection-item-title" value="${data.title}">${data.title}</coral-card-title>
 	</coral-card-content>
 </coral-card>

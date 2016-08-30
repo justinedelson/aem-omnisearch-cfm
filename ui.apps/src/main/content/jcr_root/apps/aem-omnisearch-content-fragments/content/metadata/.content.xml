@@ -6,4 +6,6 @@
     includeInSuggestions="{Boolean}true"    
     listItemPath="aem-omnisearch-content-fragments/components/row"
     listOrder="{Long}10"
+    defaultSearchPath="/content/dam"
+    nodeType="dam:Asset"
     simpleCardPath=""/>
