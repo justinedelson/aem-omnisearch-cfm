@@ -1,6 +1,37 @@
 # AEM OmniSearch Content Fragments
 
-This a content package project generated using the AEM Multimodule Lazybones template.
+This a content package project which demostrates a custom OmniSearch module -- in this case one for Content Fragments.
+
+## Usage
+
+### Updating DAM Index
+
+In order for suggestions to be properly generated, it is necessary to add two properties to the `damAssetLucene` index.
+
+Under `/oak:index/damAssetLucene/indexRules/dam:Asset/properties`, create these two nodes:
+
+
+    {
+        "jcrTitle" : {
+            "jcr:primaryType":"nt:unstructured",
+            "nodeScopeIndex":true,
+            "useInSuggest":true,
+            "propertyIndex":true,
+            "useInSpellcheck":true,
+            "name":"jcr:content/jcr:title",
+            "boost":2
+        },
+        "jcrDescription" : {
+            "jcr:primaryType":"nt:unstructured",
+            "nodeScopeIndex":true,
+            "useInSuggest":true,
+            "propertyIndex":true,
+            "useInSpellcheck":true,
+            "name":"jcr:content/jcr:description"
+        }
+    }
+
+After adding these, you will also need to reindex the `damAssetLucene` index.
 
 ## Building
 

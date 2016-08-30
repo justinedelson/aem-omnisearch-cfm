@@ -15,8 +15,11 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFactory;
 import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +46,24 @@ public final class ContentFragmentOmniSearchHandler implements OmniSearchHandler
 
     @Override
     public Query getSuggestionQuery(ResourceResolver resourceResolver, String term) {
-        return null;
+        // would be nice to have 'AND [jcr:content/contentFragment] = true' in this query, but that doesn't work currently
+        String queryStr = "SELECT [rep:suggest()] FROM [dam:Asset] as s WHERE SUGGEST($term) AND ISDESCENDANTNODE([/content/dam])";
+        try {
+            Query query = createQuery(resourceResolver, term, queryStr);
+            return query;
+        } catch (RepositoryException e) {
+            log.error("Unable to create suggestions query", e);
+            return null;
+        }
+    }
+
+    private Query createQuery(ResourceResolver resourceResolver, String term, String queryStr) throws RepositoryException {
+        Session session = resourceResolver.adaptTo(Session.class);
+        QueryManager queryManager = session.getWorkspace().getQueryManager();
+        Query query = queryManager.createQuery(queryStr, Query.JCR_SQL2);
+        ValueFactory vf = session.getValueFactory();
+        query.bindValue("term", vf.createValue(term));
+        return query;
     }
 
     @Override
