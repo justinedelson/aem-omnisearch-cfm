@@ -1,7 +1,15 @@
-<tr class="foundation-collection-navigator" is="coral-tr" data-sly-use.data="data.js">
+<tr
+    data-sly-use.data="data.js"
+    data-item-title="${data.title}"
+    data-foundation-collection-navigator-href="${data.navigationHref}"
+    class="foundation-collection-item foundation-collection-navigator"
+    is="coral-tr">
     <td is="coral-td" coral-tr-select>
-    	<coral-icon class="foundation-collection-item-thumbnail" icon="folder"></coral-icon>
+        <img class="foundation-collection-item-thumbnail" src="${data.thumbnailUrl}" alt="${data.title}">
     </td>
     <td class="foundation-collection-item-title" is="coral-td">${data.title}</td>
+    <td is="coral-td"><time datetime="${data.lastModified}">
+        <coral-icon icon="edit" size="xs"></coral-icon> ${data.formattedRelativeTime}</time>
+    </td>
     <td is="coral-td">${data.description}</td>
 </tr>

@@ -14,6 +14,12 @@
                 configurable="{Boolean}false"
                 default="{Boolean}true"
                 sortable="{Boolean}true"/>
+            <lastmodified
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Last Modified"
+                configurable="{Boolean}false"
+                default="{Boolean}true"
+                sortable="{Boolean}true"/>                
             <description
                 jcr:primaryType="nt:unstructured"
                 jcr:title="Description"
