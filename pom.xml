@@ -137,7 +137,7 @@
                 <artifactId>uber-jar</artifactId>
                 <version>6.2.0</version>
                 <scope>provided</scope>
-                <classifier>obfuscated-apis</classifier>
+                <classifier>apis</classifier>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
