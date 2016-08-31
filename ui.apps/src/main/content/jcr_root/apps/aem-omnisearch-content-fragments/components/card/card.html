@@ -18,4 +18,10 @@
         </coral-card-property>
     </coral-card-propertylist>
 	<link rel="properties" href="${data.navigationHref}">
+    <meta class="foundation-collection-quickactions" data-foundation-collection-quickactions-rel="${data.actionRels.list}">
 </coral-card>
+<coral-quickactions target="_prev" alignmy="left top" alignat="left top">
+    <coral-quickactions-item icon="check" class="foundation-collection-item-activator">${'Select' @ i18n, locale=request.locale}</coral-quickactions-item>
+    <coral-quickactions-item icon="edit" class="foundation-anchor" data-foundation-anchor-href="${data.navigationHref}">${'Edit' @ i18n, locale=request.locale}</coral-quickactions-item>
+    <coral-quickactions-item icon="infoCircle" class="foundation-anchor" data-foundation-anchor-href="${data.propertiesHref}" data-contextpath = "/assetdetails.html">${'View Properties' @ i18n, locale=request.locale}</coral-quickactions-item>
+</coral-quickactions>
