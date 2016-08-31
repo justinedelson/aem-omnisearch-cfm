@@ -2,6 +2,7 @@
     data-sly-use.data="data.js"
     data-item-title="${data.title}"
     data-foundation-collection-navigator-href="${data.navigationHref}"
+    data-foundation-collection-item-id="${data.path}"
     class="foundation-collection-item foundation-collection-navigator"
     is="coral-tr">
     <td is="coral-td" coral-tr-select>
@@ -11,5 +12,8 @@
     <td is="coral-td"><time datetime="${data.lastModified}">
         <coral-icon icon="edit" size="xs"></coral-icon> ${data.formattedRelativeTime}</time>
     </td>
-    <td is="coral-td">${data.description}</td>
+    <td is="coral-td">
+        ${data.description}
+        <meta class="foundation-collection-quickactions" data-foundation-collection-quickactions-rel="">
+    </td>
 </tr>

@@ -17,6 +17,7 @@ use(function() {
     }
 
     return {
+        path: escapedPath,
         lastModified: lastModified,
         formattedRelativeTime: formattedRelativeTime,
         navigationHref: request.getContextPath() + CONTENT_FRAGMENT_EDITOR_VANITY + escapedPath,
