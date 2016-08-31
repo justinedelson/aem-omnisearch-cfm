@@ -2,4 +2,5 @@
 <workspaceFilter version="1.0">
     <filter root="/apps/aem-omnisearch-content-fragments"/>
     <filter root="/apps/granite/ui/components/shell/omnisearch/datasource/columnsdatasource/columnsdatasource.jsp"/>
+    <filter root="/apps/settings/cf"/>
 </workspaceFilter>

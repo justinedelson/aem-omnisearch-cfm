@@ -5,4 +5,4 @@
     cardPath="aem-omnisearch-content-fragments/components/card"
     listItemPath="aem-omnisearch-content-fragments/components/row"
     listOrder="{Long}10"
-    simpleCardPath=""/>
+    searchRailPath="aem-omnisearch-content-fragments/search/panel"/>
