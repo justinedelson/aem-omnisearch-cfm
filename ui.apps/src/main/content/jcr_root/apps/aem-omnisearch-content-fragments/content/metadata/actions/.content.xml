@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured">
+    <selection jcr:primaryType="nt:unstructured">
+        <editfragment
+            granite:rel="aem-assets-admin-actions-edit-fragment-activator"
+            granite:class="cq-damadmin-admin-checkout-restricted"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+            action="foundation.link"
+            activeSelectionCount="single"
+            icon="edit"
+            text="Edit"
+            variant="actionBar">
+            <data
+                jcr:primaryType="nt:unstructured"
+                href.uritemplate="/editor.html{+item*}"
+                pageheading="AEM Assets | Asset Editor"
+                type="asset"/>
+        </editfragment>
+        <viewfragmentprops
+            granite:rel="foundation-damadmin-fragmentprops-activator"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+            action="foundation.link"
+            activeSelectionCount="single"
+            icon="infoCircle"
+            text="View Properties"
+            variant="actionBar">
+            <data
+                jcr:primaryType="nt:unstructured"
+                href.url="/mnt/overlay/dam/cfm/admin/content/metadata-editor.html{+item}"/>
+        </viewfragmentprops>
+    </selection>
+</jcr:root>
