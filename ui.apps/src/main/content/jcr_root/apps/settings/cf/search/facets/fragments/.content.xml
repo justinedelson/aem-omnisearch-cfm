@@ -22,7 +22,7 @@
                 isSuggestable="{Boolean}false"
                 listOrder="6"
                 metaType="tags"
-                name="cq:tags"
+                name="jcr:content/metadata/cq:tags"
                 rootPath="/etc/tags"/>
             <contenttype
                 jcr:primaryType="nt:unstructured"
