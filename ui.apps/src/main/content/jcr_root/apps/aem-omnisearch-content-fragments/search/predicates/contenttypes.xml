@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:vlt="http://www.day.com/jcr/vault/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
-    jcr:mixinTypes="[vlt:FullCoverage]"
     jcr:primaryType="sling:OrderedFolder"
     jcr:title="Content Type">
-    <app
+    <richtext
         jcr:primaryType="nt:unstructured"
         jcr:title="Rich Text"
         checked="{Boolean}true"
         value="text/html"/>
-    <appchannel
+    <plaintext
         jcr:primaryType="nt:unstructured"
         jcr:title="Plain Text"
         checked="{Boolean}true"
         value="text/plain"/>
-    <sequencechannel
+    <markdown
         jcr:primaryType="nt:unstructured"
         jcr:title="Markdown"
         checked="{Boolean}true"
