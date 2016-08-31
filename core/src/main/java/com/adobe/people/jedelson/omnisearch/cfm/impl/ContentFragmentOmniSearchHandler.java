@@ -26,8 +26,6 @@ import java.util.Map;
 
 /**
  * This is a sample implementation of OmniSearchHandler that searches for Content Fragments.
- * In most real-world cases, this class would actually extend AbstractOmniSearchHandler, but
- * in this case, we are fully implementing the interface to be as explicit as possible.
  */
 @Component
 @Service
@@ -88,15 +86,31 @@ public final class ContentFragmentOmniSearchHandler implements OmniSearchHandler
         log.info("parameters {}", predicateParameters);
 
         Map<String, String> predicates = new HashMap<String, String>();
-        predicates.put("path", DamConstants.MOUNTPOINT_ASSETS);
-        predicates.put("type", DamConstants.NT_DAM_ASSET);
-        predicates.put("property", "jcr:content/contentFragment");
-        predicates.put("property.value", "true");
-
-        if (predicateParameters.containsKey("fulltext")) {
-            String[] ft = (String[]) predicateParameters.get("fulltext");
-            predicates.put("fulltext", ft[0]);
+        boolean addedPath = false;
+        boolean addedType = false;
+        for (Map.Entry<String, Object> param : predicateParameters.entrySet()) {
+            if (param.getValue() instanceof String[]) {
+                String[] values = (String[]) param.getValue();
+                if (values.length == 1) {
+                    if ((param.getKey().equals("path") || param.getKey().endsWith("_path"))
+                        && values[0].length() > 0) {
+                        addedPath = true;
+                    }
+                    if (param.getKey().equals("type") || param.getKey().endsWith("_type")) {
+                        addedType = true;
+                    }
+                    predicates.put(param.getKey(), values[0]);
+                }
+            }
         }
+        if (!addedPath) {
+            predicates.put("path", DamConstants.MOUNTPOINT_ASSETS);
+        }
+        if (!addedType) {
+            predicates.put("type", DamConstants.NT_DAM_ASSET);
+        }
+        predicates.put("999_property", "jcr:content/contentFragment");
+        predicates.put("999_property.value", "true");
 
         PredicateGroup predicatesGroup = PredicateGroup.create(predicates);
         com.day.cq.search.Query query = queryBuilder.createQuery(predicatesGroup, resourceResolver.adaptTo(Session.class));
