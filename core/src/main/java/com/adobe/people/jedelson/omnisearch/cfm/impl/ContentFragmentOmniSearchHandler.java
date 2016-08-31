@@ -12,6 +12,7 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,10 @@ import javax.jcr.Session;
 import javax.jcr.ValueFactory;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +42,60 @@ public final class ContentFragmentOmniSearchHandler implements OmniSearchHandler
 
     @Override
     public List<PredicateSuggestion> getPredicateSuggestions(ResourceResolver resourceResolver, I18n i18n, String term) {
-        return null;
+        List<PredicateSuggestion> matchedPredicates = new ArrayList<PredicateSuggestion>();
+        List<PredicateSuggestion> allPredicateSuggestions = getAllPredicateSuggestions(resourceResolver);
+        for (PredicateSuggestion suggestion : allPredicateSuggestions) {
+            if (i18n.getVar(suggestion.getOptionTitle()).toLowerCase().contains(term.toLowerCase())) {
+                matchedPredicates.add(suggestion);
+            }
+        }
+
+        return matchedPredicates;
+    }
+
+    private List<PredicateSuggestion> getAllPredicateSuggestions(ResourceResolver resourceResolver) {
+        Resource configResource = getModuleConfig(resourceResolver);
+        if (configResource != null) {
+            String searchRailPath = configResource.getValueMap().get("searchRailPath", String.class);
+            if (searchRailPath != null) {
+                Resource searchRailResource = resourceResolver.getResource(searchRailPath);
+                if (searchRailResource != null) {
+                    String predicatePath = searchRailResource.getValueMap().get("predicatePath", String.class);
+                    if (predicatePath != null) {
+                        Resource predicatesResource = resourceResolver.getResource("/apps/settings/" + predicatePath + "/jcr:content/items");
+                        if (predicatesResource != null) {
+                            List<PredicateSuggestion> suggestions = new ArrayList<PredicateSuggestion>();
+                            for (Resource child : predicatesResource.getChildren()) {
+                                ValueMap props = child.getValueMap();
+                                if (props.get("isSuggestable", false)) {
+                                    String optionsPath = props.get("optionPaths", String.class);
+                                    String type = props.get("text", String.class);
+                                    if (optionsPath != null) {
+                                        Resource optionsResource = resourceResolver.getResource("aem-omnisearch-content-fragments/search/predicates/contenttypes");
+                                        if (optionsResource != null) {
+                                            for (Resource option : optionsResource.getChildren()) {
+                                                ValueMap optionsProps = option.getValueMap();
+                                                String title = optionsProps.get("jcr:title", option.getName());
+
+                                                PredicateSuggestion suggestion = new PredicateSuggestion(type, title, child.getPath(), option.getPath());
+                                                Map<String, String> queryParams = new HashMap<String, String>();
+                                                String baseName = props.get("listOrder", "1") + "_property";
+                                                queryParams.put(baseName, props.get("name", String.class));
+                                                queryParams.put(baseName + ".value", optionsProps.get("value", String.class));
+                                                suggestion.setQueryParameters(queryParams);
+                                                suggestions.add(suggestion);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            return suggestions;
+                        }
+                    }
+                }
+            }
+        }
+        return Collections.emptyList();
     }
 
     @Override
